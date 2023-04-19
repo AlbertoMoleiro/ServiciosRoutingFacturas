@@ -52,6 +52,8 @@ table{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
-    padding: 0 3rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-bottom: 3px solid #b2b2b2;
 }
+

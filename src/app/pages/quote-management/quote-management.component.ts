@@ -41,7 +41,7 @@ export class QuoteManagementComponent {
     }
 
     deleteQuote(idQuote: number) {
-        if (confirm(`Estás seguro de borrar la factura ${idQuote}?}`)) {
+        if (confirm(`¿Estás seguro de borrar la factura ${idQuote}?`)) {
             this.quoteService.deleteQuote(idQuote);
             this.quotes = this.quoteService.getQuotes();
         }
@@ -57,7 +57,7 @@ export class QuoteManagementComponent {
         this.quoteService.updateQuote(this.idQuoteSelect,this.clientId, this.iva, this.total);
         this.quotes = this.quoteService.getQuotes();
         this.idQuoteSelect  = 0;
-        
+
         this.showAdd = true;
         this.hideForm();
     }
