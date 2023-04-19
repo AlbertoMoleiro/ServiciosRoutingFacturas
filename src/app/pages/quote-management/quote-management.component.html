@@ -1,0 +1,56 @@
+<div class="container">
+    <h1>Gestión de Facturas</h1>
+    <div class="searchBox">
+        <button mat-raised-button color="primary" class="width-fit" (click)="showForm()">Añadir Factura</button>
+        <mat-form-field>
+            <mat-label>Buscar por ID</mat-label>
+            <input matInput placeholder="Buscar" type="number" [(ngModel)]="searchText">
+        </mat-form-field>
+    </div>
+    <div class="createFormContainer" *ngIf="show">
+            <div class="createForm">
+                <mat-form-field>
+                    <mat-label>ID Cliente</mat-label>
+                    <input matInput placeholder="ID Cliente" type="number" [(ngModel)]="clientId">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>IVA</mat-label>
+                    <input matInput placeholder="IVA" type="number" [(ngModel)]="iva">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Importe Total</mat-label>
+                    <input matInput placeholder="Importe Total" type="number" [(ngModel)]="total">
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="createQuote()" *ngIf="showAdd else modify">Añadir</button>
+                <ng-template #modify><button mat-raised-button color="primary" (click)="updateQuote()" >Modificar</button></ng-template>
+                <button mat-raised-button color="warn" (click)="hideForm()">Cancelar</button>
+            </div>
+    </div>
+
+    <table class="bg-white">
+        <thead>
+            <tr>
+                <th>Factura Nº</th>
+                <th>ID Cliente</th>
+                <th>IVA</th>
+                <th>Importe Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let quote of quotes">
+                <tr *ngIf=" searchText == 0 || searchText == undefined || quote.idQuote.toString().startsWith(searchText.toString())">
+                    <td>{{quote.idQuote}}</td>
+                    <td>{{quote.idClient}}</td>
+                    <td>{{quote.iva}} %</td>
+                    <td>{{quote.total}} €</td>
+                    <td class="td-buttons"><button mat-raised-button color="primary" (click)="showUpdateForm(quote.idQuote)">Modificar</button>
+                        <button mat-raised-button color="warn" (click)="deleteQuote(quote.idQuote)">Borrar</button>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+
+</div>
+
