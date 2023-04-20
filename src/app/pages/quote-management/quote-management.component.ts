@@ -31,6 +31,9 @@ export class QuoteManagementComponent {
     }
 
     hideForm() {
+        this.clientId = 0;
+        this.iva = 0;
+        this.total = 0;
         this.show = false;
     }
 
@@ -49,6 +52,9 @@ export class QuoteManagementComponent {
 
     showUpdateForm(idQuote: number) {
         this.idQuoteSelect = idQuote;
+        this.clientId = this.quotes.find(x => x.idQuote == idQuote)?.idClient!;
+        this.iva = this.quotes.find(x => x.idQuote == idQuote)?.iva!;
+        this.total = this.quotes.find(x => x.idQuote == idQuote)?.total!;
         this.showForm();
         this.showAdd = false;
     }
@@ -57,6 +63,8 @@ export class QuoteManagementComponent {
         this.quoteService.updateQuote(this.idQuoteSelect,this.clientId, this.iva, this.total);
         this.quotes = this.quoteService.getQuotes();
         this.idQuoteSelect  = 0;
+
+        
 
         this.showAdd = true;
         this.hideForm();
